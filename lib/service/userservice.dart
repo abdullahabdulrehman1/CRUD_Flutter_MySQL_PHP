@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 class UserService {
   static final  addUrl = Uri.parse("http://192.168.1.33/students_api/add.php" ); // Replace with the actual URL
   static final  viewUrl = Uri.parse("http://192.168.1.33/students_api/view.php" ); // Replace with the actual URL
+  static final  updateUrl = Uri.parse("http://192.168.1.33/students_api/update.php" ); // Replace with the actual URL
   // static final  = "http://192.168.1.33/students_api/view.php"; // Replace with the actual URL
   
   Future<String> addUser(UserModel usermodel) async {
@@ -39,6 +40,15 @@ Future<List<UserModel>> getUser() async {
     throw Exception('Failed to fetch user data: $e');
   }
 }
+ Future<String> updateUser(UserModel usermodel) async {
+    final response = await http.post(updateUrl, body: usermodel.toJsonUpdate());
+    if (response.statusCode == 200) {
+      print(response.body);
+      return response.body;
+    } else {
+      return "ERROR";
+    }
+  }
 
 
 }
