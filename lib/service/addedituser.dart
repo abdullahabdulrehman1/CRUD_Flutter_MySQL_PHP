@@ -86,7 +86,12 @@ class _AddEditUserState extends State<AddEditUser> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                if (name.text.isEmpty) {
+               if(editmode){
+                UserModel userModel = UserModel(id:widget.userModel?.id,name: name.text,email: email.text);
+                update(userModel);
+               }
+               else{
+                 if (name.text.isEmpty) {
                   Fluttertoast.showToast(
                     msg: "This Field is required",
                     gravity: ToastGravity.CENTER,
@@ -100,6 +105,7 @@ class _AddEditUserState extends State<AddEditUser> {
                     gravity: ToastGravity.CENTER,
                     toastLength: Toast.LENGTH_SHORT,
             );}
+               }
               },
               child:  Text(editmode? "Update":"SAVE"),
             ),
