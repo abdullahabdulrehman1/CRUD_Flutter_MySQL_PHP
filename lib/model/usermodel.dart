@@ -7,13 +7,16 @@ class UserModel {
   UserModel({this.email, this.id, this.name});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(email: json['email'] as String, id: json['id'] , name: json['name'] as String);
+    return UserModel(
+        email: json['email'] as String,
+       
+        name: json['name'] as String);
   }
-  Map<String,dynamic>toJsonAdd(){
-    return{
-      "id": id ,
-      "email": email ,
-      "name":name ,
+  Map<String, dynamic> toJsonAdd() {
+    return {
+     
+      "email": email,
+      "name": name,
     };
   }
 }

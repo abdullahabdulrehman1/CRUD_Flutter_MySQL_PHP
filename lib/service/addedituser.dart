@@ -12,7 +12,7 @@ class AddEditUser extends StatefulWidget {
 class _AddEditUserState extends State<AddEditUser> {
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController id = TextEditingController();
+  // TextEditingController id = TextEditingController();
 
   void add(UserModel userModel) async {
     await UserService().addUser(userModel).then(
@@ -32,14 +32,7 @@ class _AddEditUserState extends State<AddEditUser> {
       ),
       body: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: id,
-              
-              decoration: const InputDecoration(hintText: 'Enter id'),
-            ),
-          ),
+          
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
@@ -65,7 +58,7 @@ class _AddEditUserState extends State<AddEditUser> {
                     toastLength: Toast.LENGTH_SHORT,
                   );
                 } else {
-                  UserModel userModel = UserModel(name: name.text, email: email.text,id: id.text);
+                  UserModel userModel = UserModel(name: name.text, email: email.text);
                   add(userModel);
                   Fluttertoast.showToast(
                     msg: "Successfully Saved",
