@@ -45,7 +45,7 @@ class _UserViewState extends State<UserView> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddEditUser()),
+                MaterialPageRoute(builder: (context) => AddEditUser(),),).then((value)=>getAllUser(),
               );
             },
             icon: const Icon(Icons.add),
@@ -59,9 +59,17 @@ class _UserViewState extends State<UserView> {
               itemBuilder: (context, index) {
                 UserModel user = userList[index];
                 return ListTile(
+                  onTap: () {
+                    
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddEditUser(index: index,userModel: user,))).then((value) => getAllUser());
+                  },
                   title: Text(user.name !),
-                  leading: CircleAvatar(child:  Image.asset("c1.png",height: 40,width: 40,),),
+               leading:  CircleAvatar(child: Text(user.name![0])),
                   subtitle: Text(user.email!),
+                  trailing: IconButton(onPressed: (){
+ 
+
+                  }, icon: Icon(Icons.delete)),
                 );
               },
             ),
