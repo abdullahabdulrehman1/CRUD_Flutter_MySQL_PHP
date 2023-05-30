@@ -1,36 +1,40 @@
-// import 'dart:convert';
-
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:mysqlcrudapp/model/usermodel.dart';
 import 'package:mysqlcrudapp/service/addedituser.dart';
 import 'package:mysqlcrudapp/service/userservice.dart';
 
-import 'model/usermodel.dart';
-
 class UserView extends StatefulWidget {
-  const UserView({super.key});
+  const UserView({Key? key}) : super(key: key);
 
   @override
-  State<UserView> createState() => _UserViewState();
+  _UserViewState createState() => _UserViewState();
 }
 
 class _UserViewState extends State<UserView> {
-  List<UserModel> userList=[];
+  List<UserModel> userList = [];
   bool loading = true;
-  getAllUser()async{userList = await UserService().getUser();
-    loading = false;
-  setState(() {
-  });
-print("user: ${userList.length}");
-  
-  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getAllUser();
   }
+
+  Future<void> getAllUser() async {
+    try {
+      final userService = UserService();
+      userList = await userService.getUser();
+      setState(() {
+        loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        loading = false;
+      });
+      print('Error fetching user data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,16 +52,19 @@ print("user: ${userList.length}");
           ),
         ],
       ),
-      body:  loading?  Center(child: CircularProgressIndicator(color: Colors.red),) : ListView.builder(
-        itemCount: userList.length,itemBuilder: (context,  index )
-        {
-        UserModel user = userList[index];
-      
-        return ListTile(
-        title: Text("${user.name}" ,style: TextStyle(fontWeight: FontWeight.bold),),
-
-        );
-      })
+      body: loading
+          ? Center(child: CircularProgressIndicator(color: Colors.red))
+          : ListView.builder(
+              itemCount: userList.length,
+              itemBuilder: (context, index) {
+                UserModel user = userList[index];
+                return ListTile(
+                  title: Text(user.name !),
+                  leading: CircleAvatar(child:  Image.asset("c1.png",height: 40,width: 40,),),
+                  subtitle: Text(user.email!),
+                );
+              },
+            ),
     );
   }
 }
