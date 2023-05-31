@@ -20,6 +20,7 @@ class _AddEditUserState extends State<AddEditUser> {
 
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController id = TextEditingController();
   bool editmode = false; 
   // TextEditingController id = TextEditingController();
 
@@ -53,8 +54,9 @@ class _AddEditUserState extends State<AddEditUser> {
     super.initState();
     if(widget.index!=null){
       editmode = true;
-      name.text = widget.userModel!.email!;
-      name.text = widget.userModel!.name!;
+      // name.text = widget.userModel!.email!;
+      // name.text = widget.userModel!.name!;
+      // name.text = widget.userModel!.id!;
     }
   }
   @override
@@ -66,6 +68,13 @@ class _AddEditUserState extends State<AddEditUser> {
       body: Column(
         children: <Widget>[
           
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: id,
+              decoration: const InputDecoration(hintText: 'Enter id'),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
