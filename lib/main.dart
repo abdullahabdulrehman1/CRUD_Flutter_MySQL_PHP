@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "FLUTTER CRUD",
       theme: ThemeData(primarySwatch: Colors.blue,visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: const UserView()
+      home: UserView()
     );
   }
 }

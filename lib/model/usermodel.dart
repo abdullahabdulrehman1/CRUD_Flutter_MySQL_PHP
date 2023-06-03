@@ -9,7 +9,7 @@ class UserModel {
     return UserModel(
       email: json['email'] as String,
       name: json['name'] as String,
-      id: json['id'] as String,
+      // id: json['id'] as String,
     );
   }
 
@@ -17,13 +17,13 @@ class UserModel {
     return {
       "email": email,
       "name": name,
-        "id": id,
+        // "id": id,
     };
   }
 
   Map<String, dynamic> toJsonUpdate() {
     return {
-      "id": id,
+      // "id": id,
       "email": email,
       "name": name,
     };
